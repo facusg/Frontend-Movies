@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoginScreen from "../components/login/LoginScreen";
 import RegisterScreen from "../components/login/RegisterScreen";
@@ -11,6 +11,21 @@ export default function AppRouter() {
     setUser(newUser);
   };
 
+  useEffect(CheckUser, []);
+
+  function CheckUser() {
+    fetch("http://localhost:8000/auth/check", {
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+        console.log(data);
+        console.log(data.data.user);
+        console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+        updateUser(data.data.user);
+      });
+  }
   return (
     <Router>
       <div>
