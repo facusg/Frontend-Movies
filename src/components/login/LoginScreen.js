@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -31,12 +32,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LoginScreen({ history }) {
+export default function LoginScreen(props) {
   const classes = useStyles();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorLogin, setErrorLogin] = useState("");
+  const history = useHistory();
 
-  const handleLogin = () => {
-    history.replace("/");
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  async function handleLogin() {
+    const login = { email, password };
+    const url = "http://localhost:8000/auth";
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(login),
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
+
+    const data = await response.json();
+    if (response.status === 200) {
+      props.updateUser(data.user);
+      history.replace("/");
+      setErrorLogin(data.message);
+    } else {
+      setErrorLogin(data.message);
+      alert(data.message);
+    }
+
+    /*  */
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -59,6 +91,8 @@ export default function LoginScreen({ history }) {
             name="email"
             autoComplete="email"
             autoFocus
+            value={email}
+            onChange={handleEmailChange}
           />
           <TextField
             variant="outlined"
@@ -70,8 +104,10 @@ export default function LoginScreen({ history }) {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={handlePasswordChange}
           />
-          <p></p>
+          <p>{errorLogin}</p>
           <Button
             fullWidth
             variant="contained"

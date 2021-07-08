@@ -1,22 +1,18 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
-
+import { Switch, Route, Redirect } from "react-router-dom";
 import NavBar from "../components/navbar/NavBar";
 import MoviesScreen from "../components/movies/MoviesScreen";
 import SeriesScreen from "../components/series/SeriesScreen";
 import FavoritesScreen from "../components/favorites/FavoritesScreen";
 import Browse from "../components/browse/Browse";
 
-export default function DashboardRoutes() {
+export default function DashboardRoutes(props) {
+  const user = props.user;
+  const updateUser = props.updateUser;
+
   return (
     <>
-      <NavBar />
+      <NavBar user={user} updateUser={updateUser} />
       <div>
         <Switch>
           <Route exact path="/" component={Browse} />

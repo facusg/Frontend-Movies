@@ -10,8 +10,9 @@ import { Link } from "react-router-dom";
 import Bottons from "./Bottons";
 import BottonLogin from "./BottonLogin";
 
-export default function NavBar() {
+export default function NavBar({ user, updateUser }) {
   const [show, handleShow] = useState(false);
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY < 50) {
@@ -22,7 +23,6 @@ export default function NavBar() {
     });
     return () => {
       window.removeEventListener("scroll", () => {});
-      /*  window.addEventListener("focus", () => {}); */
     };
   }, []);
 
@@ -42,10 +42,11 @@ export default function NavBar() {
               <Typography value="h5">"Logo"</Typography>
             </Button>
           </Link>
-
-          <Bottons />
-
-          <BottonLogin />
+          {user ? (
+            <Bottons user={user} updateUser={updateUser} />
+          ) : (
+            <BottonLogin />
+          )}
         </Toolbar>
       </AppBar>
     </div>

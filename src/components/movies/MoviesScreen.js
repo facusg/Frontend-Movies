@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Banner from "../banner/Banner";
 import request from "../API/request";
-import axios from "../API/axios";
 import Row from "../row/Row";
 
 export default function MoviesScreen() {

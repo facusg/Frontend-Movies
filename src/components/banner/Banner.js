@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import "./Banner.css";

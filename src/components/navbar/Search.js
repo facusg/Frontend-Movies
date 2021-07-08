@@ -1,11 +1,9 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import { AccountCircle } from "@material-ui/icons";
-import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -49,7 +47,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Search() {
+export default function Search({ user }) {
+  console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkk", user);
   const classes = useStyles();
   return (
     <>
@@ -72,9 +71,7 @@ export default function Search() {
         to="/manage"
         style={{ textDecoration: "none", color: "white" }}
       >
-        <IconButton color="inherit" aria-label="Account">
-          <AccountCircle />
-        </IconButton>
+        <Button color="inherit">{user.name}</Button>
       </Link>
     </>
   );

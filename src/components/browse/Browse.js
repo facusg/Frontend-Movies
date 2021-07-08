@@ -20,7 +20,6 @@ export default function Browse() {
     }
     fetchBannerMovie();
   }, []);
-  console.log(banner + "holas");
   return (
     <>
       <Banner content={banner} />

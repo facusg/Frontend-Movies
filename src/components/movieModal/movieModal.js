@@ -12,8 +12,6 @@ const MovieModal = ({
   title,
   overview,
   name,
-  release_date,
-  first_air_date,
   vote_average,
   setModalVisibility,
 }) => {
@@ -23,13 +21,10 @@ const MovieModal = ({
     height: "390",
     width: "100%",
     playerVars: {
-      autoplay: 1,
+      autoplay: 0,
     },
   };
 
-  const randomPorcentaje = () => {
-    return Math.floor(Math.random() * 100);
-  };
   useEffect(() => {
     if (trailerUrl) {
       setTrailerUrl("");
@@ -42,6 +37,16 @@ const MovieModal = ({
         .catch((error) => console.log(error));
     }
   }, []);
+
+  const data = {
+    id,
+    backdrop_path,
+    title,
+    overview,
+    name,
+    vote_average,
+    trailerUrl,
+  };
 
   return (
     <div className="presentation" role="presentation">
@@ -68,7 +73,7 @@ const MovieModal = ({
               precision={0.1}
               readOnly
             />
-            <FavoritesButtom id={id} />
+            <FavoritesButtom data={data} />
           </div>
           <div className="modal__content">
             <h2 className="modal__title">{title ? title : name}</h2>

@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import Search from "./Search";
 import BottonLogout from "./BottonLogout";
 
-export default function Bottons() {
+export default function Bottons({ user, updateUser }) {
   return (
     <>
       <NavLink
@@ -31,8 +31,8 @@ export default function Bottons() {
         <Button color="inherit">Mi List</Button>
       </NavLink>
       <div style={{ flexGrow: 1 }}></div>
-      <Search />
-      <BottonLogout />
+      <Search user={user} />
+      <BottonLogout updateUser={updateUser} />
     </>
   );
 }

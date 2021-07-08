@@ -33,4 +33,9 @@ export default requests;
 https://api.themoviedb.org/3/tv/{tv_id}?api_key=${API_KEY}&language=en-US
 https://api.themoviedb.org/3/movie/{movie_id}?api_key=${API_KEY}&language=en-US
 
+https://api.themoviedb.org/3/search/company?api_key=896c8566fc255f7c52f6ea6bd2901188&page=1
+
+https://api.themoviedb.org/3/search/movie?api_key=896c8566fc255f7c52f6ea6bd2901188&language=en-US&page=1
+
+
 */

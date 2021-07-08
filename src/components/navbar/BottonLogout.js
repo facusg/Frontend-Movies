@@ -1,22 +1,26 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
 
-export default function BottonLogout() {
-  const handleLogoutClick = () => {
-    console.log("Me deslogeo");
+export default function BottonLogout(props) {
+  const handleLogout = async () => {
+    const url = "http://localhost:8000/auth";
+    const response = await fetch(url, {
+      method: "DELETE",
+      credentials: "include",
+    });
+    const data = await response.json();
+    if (response.status === 200) {
+      alert(data.message);
+      props.updateUser(null);
+    } else {
+      alert(data.message);
+    }
   };
   return (
     <>
-      <Link
-        exact
-        to="/login"
-        style={{ textDecoration: "none", color: "white" }}
-      >
-        <Button onClick={handleLogoutClick} color="inherit" href="#">
-          Logout
-        </Button>
-      </Link>
+      <Button onClick={handleLogout} color="inherit">
+        Logout
+      </Button>
     </>
   );
 }
