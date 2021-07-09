@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -128,9 +128,9 @@ export default function LoginScreen(props) {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/register" variant="body2">
+              <NavLink to="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
-              </Link>
+              </NavLink>
             </Grid>
           </Grid>
         </form>

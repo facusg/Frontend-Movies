@@ -19,10 +19,6 @@ export default function AppRouter() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-        console.log(data);
-        console.log(data.data.user);
-        console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
         updateUser(data.data.user);
       });
   }
@@ -35,7 +31,11 @@ export default function AppRouter() {
             path="/login"
             component={() => <LoginScreen updateUser={updateUser} />}
           />
-          <Route exact path="/register" component={RegisterScreen} />
+          <Route
+            exact
+            path="/register"
+            component={() => <RegisterScreen updateUser={updateUser} />}
+          />
           <Route exact path="/manage" component={Manage} />
           <Route
             path="/"
