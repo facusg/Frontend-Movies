@@ -59,10 +59,6 @@ export default function LoginScreen(props) {
 
     const data = await response.json();
     if (response.status === 200) {
-      console.log("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
-      console.log(data.user);
-      console.log("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
-
       props.updateUser(data.user);
       history.replace("/");
       setErrorLogin(data.message);

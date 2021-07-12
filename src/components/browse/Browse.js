@@ -20,6 +20,7 @@ export default function Browse() {
     }
     fetchBannerMovie();
   }, []);
+
   return (
     <>
       <Banner content={banner} />

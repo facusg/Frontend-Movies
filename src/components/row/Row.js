@@ -6,19 +6,11 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 const Row = ({ title, fetchUrl, isLargeRow, id }) => {
-  const db = true;
-  console.log("----------------------------------------");
-  console.log(id);
-  console.log("----------------------------------------");
-
   const base_url = "https://image.tmdb.org/t/p/original/";
   const [movies, setMovies] = useState([]);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [movieSelected, setMovieSelection] = useState({});
 
-  if (db) {
-  } else {
-  }
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(fetchUrl);

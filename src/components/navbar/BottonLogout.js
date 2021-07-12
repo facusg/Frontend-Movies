@@ -1,7 +1,10 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router-dom";
 
 export default function BottonLogout(props) {
+  const history = useHistory();
+
   const handleLogout = async () => {
     const url = "http://localhost:8000/auth";
     const response = await fetch(url, {
@@ -10,8 +13,8 @@ export default function BottonLogout(props) {
     });
     const data = await response.json();
     if (response.status === 200) {
-      alert(data.message);
       props.updateUser(null);
+      history.replace("/");
     } else {
       alert(data.message);
     }
