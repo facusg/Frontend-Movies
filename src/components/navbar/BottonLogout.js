@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 export default function BottonLogout(props) {
   const history = useHistory();
@@ -13,8 +14,8 @@ export default function BottonLogout(props) {
     });
     const data = await response.json();
     if (response.status === 200) {
-      props.updateUser(null);
       history.replace("/");
+      props.updateUser(null);
     } else {
       alert(data.message);
     }
@@ -22,7 +23,7 @@ export default function BottonLogout(props) {
   return (
     <>
       <Button onClick={handleLogout} color="inherit">
-        Logout
+        <ExitToAppIcon />
       </Button>
     </>
   );

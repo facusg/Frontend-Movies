@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoginScreen from "../components/login/LoginScreen";
 import RegisterScreen from "../components/login/RegisterScreen";
 import DashboardRoutes from "./DashboardRoutes";
+import { UserContext } from "../UserContext";
 
 export default function AppRouter() {
-  const [user, setUser] = useState("");
+  const { user, setUser } = useContext(UserContext);
+
   const updateUser = (newUser) => {
     setUser(newUser);
   };
@@ -47,10 +49,3 @@ export default function AppRouter() {
     </Router>
   );
 }
-
-/* <Route
-  path='/dashboard'
-  render={(props) => (
-    <Dashboard {...props} isAuthed={true} />
-  )}
-/> */

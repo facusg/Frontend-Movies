@@ -61,23 +61,14 @@ export default function Search({ user }) {
   };
 
   const movieSearch = request.base + request.fetchSearchMovie + search;
-  const serieSearch = request.base + request.fetchSearchSerie + search;
-
   const handleSendSearch = async (e) => {
     if (search.length > 1) {
       history.replace("/");
     }
     if (e.key === "Enter") {
       if (search.length >= 2) {
-        /* const request = await fetch(movieSearch);
-        const dataMovie = await request.json();
-
-        const request2 = await fetch(serieSearch);
-        const dataSerie = await request2.json(); */
         setSearchURL(movieSearch);
         console.clear();
-        /*  console.log(dataMovie);
-        console.log(dataSerie); */
         history.replace("/search");
       }
     }
@@ -105,7 +96,7 @@ export default function Search({ user }) {
       <Link
         exact
         to="/manage"
-        style={{ textDecoration: "none", color: "white" }}
+        style={{ textDecoration: "none", color: "white", marginLeft: 20 }}
       >
         <Button color="inherit">{user.name}</Button>
       </Link>

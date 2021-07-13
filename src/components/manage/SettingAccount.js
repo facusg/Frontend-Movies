@@ -15,6 +15,8 @@ export default function SettingAccount({ user, updateUser }) {
   const history = useHistory();
   const [deleteConf, setDelete] = useState(false);
   const [message, setMessage] = useState("");
+  const [message2, setMessage2] = useState("");
+
   const [deletePassword, setDeletePassword] = useState("");
 
   const [values, setValues] = useState({
@@ -35,7 +37,7 @@ export default function SettingAccount({ user, updateUser }) {
   }
 
   async function handleChangeAccount() {
-    if (!(values.firstName, values.lastName, values.email == "")) {
+    if (!(values.firstName, values.lastName, values.email === "")) {
       const url = `http://localhost:8000/users/account/${user.id}`;
       const response = await fetch(url, {
         method: "PUT",
@@ -57,18 +59,24 @@ export default function SettingAccount({ user, updateUser }) {
   }
 
   async function handleDeleteAccount() {
-    const url = `http://localhost:8000/users/${user.id}`;
-    const response = await fetch(url, {
-      method: "DELETE",
-      body: JSON.stringify({ deletePassword }),
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
-    const data = await response.json();
-    if (response.status === 200) {
-      alert(data.message);
-      updateUser(data.user);
-      history.replace("/");
+    if (deletePassword === "") {
+      setMessage2("Tiene que ingresar su contraseña");
+    } else {
+      console.log(deletePassword);
+      const url = `http://localhost:8000/users/${user.id}`;
+      const response = await fetch(url, {
+        method: "DELETE",
+        body: JSON.stringify({ deletePassword }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (response.status === 200) {
+        alert(data.message);
+        setMessage(data.message);
+        updateUser(data.user);
+        history.replace("/");
+      }
     }
   }
 
@@ -170,7 +178,7 @@ export default function SettingAccount({ user, updateUser }) {
                 value={deletePassword}
                 variant="outlined"
               />
-              <p>{message}</p>
+              <p>{message2}</p>
             </CardContent>
 
             <Box

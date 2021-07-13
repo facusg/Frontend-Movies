@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import "./Banner.css";
+import MovieModal from "../movieModal/movieModal";
 
 const Banner = (props) => {
+  const [modalVisibility, setModalVisibility] = useState(false);
+
   const truncate = (str, n) => {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;
   };
 
-  console.log(props);
+  function handleClick() {
+    setModalVisibility(true);
+  }
+
+  function handleBannerPlay() {}
+
   return (
     <header
       className="banner"
@@ -30,15 +38,15 @@ const Banner = (props) => {
             props.content?.original_name}
         </h1>
         <div className="banner__buttons">
-          <button className="banner__button play">
+          <button className="banner__button play" onClick={handleBannerPlay}>
             <PlayArrowIcon />
             Play
           </button>
-          <button className="banner__button info">
+          <button className="banner__button info" onClick={handleClick}>
             <InfoOutlinedIcon
               fontSize="small"
-              paddingRight={20}
-              marginRight={100}
+              paddingright={20}
+              marginright={100}
             />
             <div className="space"></div> More Information
           </button>
@@ -51,6 +59,12 @@ const Banner = (props) => {
         {/*Description*/}
       </div>
       <div className="banner--fadeBottom" />
+      {modalVisibility && (
+        <MovieModal
+          {...props.content}
+          setModalVisibility={setModalVisibility}
+        />
+      )}
     </header>
   );
 };

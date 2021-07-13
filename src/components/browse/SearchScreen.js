@@ -9,7 +9,7 @@ export default function SearchScreen() {
 
   return (
     <div id="searchScreen" style={{ marginTop: 80 }}>
-      {searchURL != "" ? (
+      {searchURL !== "" ? (
         <Row title="" id="SEARCH" fetchUrl={searchURL} isLargeRow />
       ) : (
         <h1 style={{ margintop: 10000 }}>NO HAY NADA PARA MOSTRAR</h1>

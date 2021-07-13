@@ -1,28 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import { UserContext } from "../../UserContext";
 
 export default function FavoritesButtom({ data }) {
+  const { user } = useContext(UserContext);
+
   const id = data.id;
   const path = data.backdrop_path;
   const title = data.title;
   const overview = data.overview;
   const vote = data.vote_average;
 
-  const trailerUrl = data.trailerUrl;
-
-  /*  const AddFavorites = () => {
-    console.log(favorite);
-  }; */
-
   async function AddFavorites() {
     const favorite = { id, path, title, overview, vote };
-    console.log("-----------------------------------");
-    console.log(favorite);
-    console.log("-----------------------------------");
-    console.log(trailerUrl);
-    console.log("-----------------------------------");
-
     const url = "http://localhost:8000/favorites";
     const response = await fetch(url, {
       method: "POST",
@@ -39,13 +30,17 @@ export default function FavoritesButtom({ data }) {
   }
   return (
     <>
-      <IconButton
-        aria-label="add to favorites"
-        className="modal__favorite"
-        onClick={AddFavorites}
-      >
-        <FavoriteIcon />
-      </IconButton>
+      {user ? (
+        <IconButton
+          aria-label="add to favorites"
+          className="modal__favorite"
+          onClick={AddFavorites}
+        >
+          <FavoriteIcon />
+        </IconButton>
+      ) : (
+        <></>
+      )}
     </>
   );
 }

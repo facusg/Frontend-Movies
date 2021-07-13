@@ -4,12 +4,10 @@ import { UserContext } from "./UserContext";
 
 export default function MoviesApp() {
   const [searchURL, setSearchURL] = useState("");
-  const [serieSearch, setSerieSearch] = useState(null);
+  const [user, setUser] = useState("");
 
   return (
-    <UserContext.Provider
-      value={{ searchURL, setSearchURL, serieSearch, setSerieSearch }}
-    >
+    <UserContext.Provider value={{ searchURL, setSearchURL, user, setUser }}>
       <AppRouter className="app" />
     </UserContext.Provider>
   );

@@ -19,7 +19,7 @@ export default function Browse() {
       return data;
     }
     fetchBannerMovie();
-  }, []);
+  }, [urlBanner]);
 
   return (
     <>

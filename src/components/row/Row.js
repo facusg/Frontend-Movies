@@ -29,7 +29,7 @@ const Row = ({ title, fetchUrl, isLargeRow, id }) => {
     <section className="row">
       {/** TITLE */}
       <h2>{title}</h2>
-      <div class="slider">
+      <div className="slider">
         <div className="slider__arrow-left">
           <span
             className="arrow"

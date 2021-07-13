@@ -19,7 +19,7 @@ export default function SeriesScreen() {
       return data;
     }
     fetchBannerMovie();
-  }, []);
+  }, [urlBanner]);
   console.log(banner + "holas");
   return (
     <div className="Series">

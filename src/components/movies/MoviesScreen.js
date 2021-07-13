@@ -18,7 +18,7 @@ export default function MoviesScreen() {
       return data;
     }
     fetchBannerSerie();
-  }, []);
+  }, [urlBanner]);
   console.log(banner);
 
   return (

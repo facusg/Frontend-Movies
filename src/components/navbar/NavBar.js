@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import { Menu } from "@material-ui/icons";
+import { AppBar, Toolbar, Button, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 import Bottons from "./Bottons";
@@ -25,7 +20,6 @@ export default function NavBar({ user, updateUser }) {
       window.removeEventListener("scroll", () => {});
     };
   }, []);
-
   return (
     <div
       onClick={() => {
@@ -34,11 +28,8 @@ export default function NavBar({ user, updateUser }) {
     >
       <AppBar position="fixed" style={{ opacity: show }}>
         <Toolbar>
-          <IconButton color="inherit" edge="start" aria-label="menu">
-            <Menu />
-          </IconButton>
           <Link exact to="/" style={{ textDecoration: "none", color: "white" }}>
-            <Button href="/" color="inherit">
+            <Button color="inherit">
               <Typography value="h5">"Logo"</Typography>
             </Button>
           </Link>
