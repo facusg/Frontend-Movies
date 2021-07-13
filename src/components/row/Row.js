@@ -10,6 +10,7 @@ const Row = ({ title, fetchUrl, isLargeRow, id }) => {
   const [movies, setMovies] = useState([]);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [movieSelected, setMovieSelection] = useState({});
+  const [favoriteActive, setFavoriteActive] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -21,10 +22,12 @@ const Row = ({ title, fetchUrl, isLargeRow, id }) => {
     fetchData();
   }, [fetchUrl]);
 
-  const handleClick = (movie) => {
+  async function handleClick(movie) {
+    console.log("mostrar modal");
+
     setModalVisibility(true);
     setMovieSelection(movie);
-  };
+  }
   return (
     <section className="row">
       {/** TITLE */}

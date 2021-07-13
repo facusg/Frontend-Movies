@@ -17,6 +17,8 @@ const MovieModal = ({
 }) => {
   const base_url = "https://image.tmdb.org/t/p/original/";
   const [trailerUrl, setTrailerUrl] = useState("");
+  const [dataP, setDataP] = useState("");
+
   const opts = {
     height: "390",
     width: "100%",
@@ -37,7 +39,6 @@ const MovieModal = ({
         .catch((error) => console.log(error));
     }
   }, []);
-
   const data = {
     id,
     backdrop_path,

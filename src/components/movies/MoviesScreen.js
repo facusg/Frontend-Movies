@@ -19,7 +19,6 @@ export default function MoviesScreen() {
     }
     fetchBannerSerie();
   }, [urlBanner]);
-  console.log(banner);
 
   return (
     <div className="Movies">
