@@ -26,12 +26,9 @@ export default function SettingPassword({ user, updateUser }) {
   };
 
   async function handleChangePassword() {
-    console.log(user);
-    if (
-      values.newpassword === values.confirm &&
-      values.newpassword != null &&
-      values.password != null
-    ) {
+    if (values.password == "" || values.newpassword == "") {
+      setMessage("Todos lo campos deben estar llenos");
+    } else if (values.newpassword === values.confirm) {
       const url = `http://localhost:8000/users/password/${user.id}`;
       const response = await fetch(url, {
         method: "PUT",

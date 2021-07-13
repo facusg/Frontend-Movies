@@ -9,31 +9,18 @@ import {
   Grid,
   TextField,
 } from "@material-ui/core";
-
-const states = [
-  {
-    value: "alabama",
-    label: "Alabama",
-  },
-  {
-    value: "new-york",
-    label: "New York",
-  },
-  {
-    value: "san-francisco",
-    label: "San Francisco",
-  },
-];
+import { useHistory } from "react-router-dom";
 
 export default function SettingAccount({ user, updateUser }) {
-  console.log(user.name);
+  const history = useHistory();
+  const [deleteConf, setDelete] = useState(false);
+  const [message, setMessage] = useState("");
+  const [deletePassword, setDeletePassword] = useState("");
+
   const [values, setValues] = useState({
-    firstName: "Katarina",
-    lastName: "Smith",
-    email: "demo@devias.io",
-    phone: "",
-    state: "Alabama",
-    country: "USA",
+    firstName: user.name,
+    lastName: user.lastname,
+    email: user.email,
   });
 
   const handleChange = (event) => {
@@ -42,6 +29,48 @@ export default function SettingAccount({ user, updateUser }) {
       [event.target.name]: event.target.value,
     });
   };
+
+  function handelDeletePassword(event) {
+    setDeletePassword(event.target.value);
+  }
+
+  async function handleChangeAccount() {
+    if (!(values.firstName, values.lastName, values.email == "")) {
+      const url = `http://localhost:8000/users/account/${user.id}`;
+      const response = await fetch(url, {
+        method: "PUT",
+        body: JSON.stringify(values),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (response.status === 200) {
+        updateUser(data.user);
+        alert(data.message);
+        history.replace("/manage");
+      } else {
+        setMessage(data.message);
+      }
+    } else {
+      setMessage("Todos los campos deben estar completos");
+    }
+  }
+
+  async function handleDeleteAccount() {
+    const url = `http://localhost:8000/users/${user.id}`;
+    const response = await fetch(url, {
+      method: "DELETE",
+      body: JSON.stringify({ deletePassword }),
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
+    const data = await response.json();
+    if (response.status === 200) {
+      alert(data.message);
+      updateUser(data.user);
+      history.replace("/");
+    }
+  }
 
   return (
     <form autoComplete="off">
@@ -58,7 +87,7 @@ export default function SettingAccount({ user, updateUser }) {
                 name="firstName"
                 onChange={handleChange}
                 required
-                value={user.name}
+                value={values.firstName}
                 variant="outlined"
               />
             </Grid>
@@ -80,20 +109,100 @@ export default function SettingAccount({ user, updateUser }) {
                 name="email"
                 onChange={handleChange}
                 required
-                value={user.email}
+                value={values.email}
                 variant="outlined"
               />
             </Grid>
           </Grid>
         </CardContent>
+        <p>{message}</p>
         <Divider />
-        <Box
-          style={{ margin: 15, display: "flex", justifyContent: "flex-end" }}
-        >
-          <Button color="primary" variant="contained">
-            Save details
-          </Button>
-        </Box>
+        {deleteConf ? (
+          <></>
+        ) : (
+          <>
+            <Box
+              style={{
+                margin: 15,
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={handleChangeAccount}
+              >
+                Save details
+              </Button>
+            </Box>
+            <Divider />
+            <Box
+              style={{
+                margin: 15,
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Button
+                color="secondary"
+                variant="contained"
+                onClick={() => {
+                  setDelete(true);
+                }}
+              >
+                Delete account
+              </Button>
+            </Box>
+          </>
+        )}
+        {deleteConf ? (
+          <>
+            <Divider />
+            <CardContent>
+              <TextField
+                fullWidth
+                label="Confirm password"
+                margin="normal"
+                name="delete"
+                onChange={handelDeletePassword}
+                type="password"
+                value={deletePassword}
+                variant="outlined"
+              />
+              <p>{message}</p>
+            </CardContent>
+
+            <Box
+              style={{
+                margin: 15,
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Button
+                style={{ marginRight: 10 }}
+                color="secondary"
+                variant="contained"
+                onClick={handleDeleteAccount}
+              >
+                CONFIRM DELETE
+              </Button>
+              <Button
+                style={{ marginRight: 15 }}
+                color="primary"
+                variant="contained"
+                onClick={() => {
+                  setDelete(false);
+                }}
+              >
+                CANCEL
+              </Button>
+            </Box>
+          </>
+        ) : (
+          <></>
+        )}
       </Card>
     </form>
   );
