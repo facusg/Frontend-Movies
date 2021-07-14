@@ -69,6 +69,7 @@ export default function RegisterScreen(props) {
 
   const handleRegister = async () => {
     const register = { name, lastname, email, password };
+    console.log(register);
     const url = "http://localhost:8000/auth/register";
     const response = await fetch(url, {
       method: "POST",
