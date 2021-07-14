@@ -9,6 +9,7 @@ import Rating from "@material-ui/lab/Rating";
 import FavoritesButtom from "./FavoritesButtom";
 
 const MovieModal = ({
+  idAPI,
   id,
   backdrop_path,
   title,
@@ -46,7 +47,7 @@ const MovieModal = ({
   useEffect(() => {
     async function handleClick() {
       const idUser = user.id;
-      const idMovie = id;
+      const idMovie = id ? id : idAPI;
       if (user == "") {
       } else {
         const url = `http://localhost:8000/favorites/${idUser}/${idMovie}`;

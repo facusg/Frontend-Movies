@@ -29,12 +29,14 @@ export default function Browse() {
         id="NO"
         fetchUrl={request.fetchNetflixOriginals}
         isLargeRow
+        data={null}
       />
       <Row
         title="ACTION"
         id="ACTION"
         fetchUrl={request.fetchActionMovies}
         isLargeRow
+        data={null}
       />
     </>
   );

@@ -29,18 +29,45 @@ export default function SeriesScreen() {
         id="TN"
         fetchUrl={request.fetchPopularTv}
         isLargeRow
+        data={null}
       />
-      <Row title="Action Series" id="AS" fetchUrl={request.fetchActionTv} />
-      <Row title="Comedy Series" id="CS" fetchUrl={request.fetchComedyTv} />
-      <Row title="Drama Series" id="DS" fetchUrl={request.fetchDramaTv} />
+      <Row
+        title="Action Series"
+        id="AS"
+        fetchUrl={request.fetchActionTv}
+        data={null}
+      />
+      <Row
+        title="Comedy Series"
+        id="CS"
+        fetchUrl={request.fetchComedyTv}
+        data={null}
+      />
+      <Row
+        title="Drama Series"
+        id="DS"
+        fetchUrl={request.fetchDramaTv}
+        data={null}
+      />
 
       <Row
         title="Animation Series"
         id="AniS"
         fetchUrl={request.fetchAnimationTv}
+        data={null}
       />
-      <Row title="Science Fiction" id="SF" fetchUrl={request.fetchSciFiTv} />
-      <Row title="Kids Series" id="KS" fetchUrl={request.fetchKidsTv} />
+      <Row
+        title="Science Fiction"
+        id="SF"
+        fetchUrl={request.fetchSciFiTv}
+        data={null}
+      />
+      <Row
+        title="Kids Series"
+        id="KS"
+        fetchUrl={request.fetchKidsTv}
+        data={null}
+      />
     </div>
   );
 }

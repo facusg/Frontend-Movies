@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "../API/axios";
 import "./Row.css";
 import MovieModal from "../movieModal/movieModal";
@@ -10,9 +10,11 @@ const Row = ({ title, fetchUrl, isLargeRow, id }) => {
   const [movies, setMovies] = useState([]);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [movieSelected, setMovieSelection] = useState({});
+
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(fetchUrl);
+      console.log("este el el formato necesario", request.data.results);
       setMovies(request.data.results);
       return request;
     }
@@ -44,7 +46,7 @@ const Row = ({ title, fetchUrl, isLargeRow, id }) => {
           {/**SEVERAL ROW__POSTER */}
           {movies.map((movie) => (
             <img
-              key={movie.id}
+              key={movie.id || movie.idAPI}
               onClick={() => handleClick(movie)}
               className={`row__poster ${isLargeRow && "row__posterLarge"}`}
               src={`${base_url}${
