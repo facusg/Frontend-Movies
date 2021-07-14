@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../../UserContext";
+
 import "./movieModal.css";
 import Youtube from "react-youtube";
 import movieTrailer from "movie-trailer";
@@ -15,9 +17,10 @@ const MovieModal = ({
   vote_average,
   setModalVisibility,
 }) => {
+  const { user } = useContext(UserContext);
   const base_url = "https://image.tmdb.org/t/p/original/";
   const [trailerUrl, setTrailerUrl] = useState("");
-  const [dataP, setDataP] = useState("");
+  const [active, setActive] = useState(false);
 
   const opts = {
     height: "390",
@@ -39,6 +42,29 @@ const MovieModal = ({
         .catch((error) => console.log(error));
     }
   }, []);
+
+  useEffect(() => {
+    async function handleClick() {
+      const idUser = user.id;
+      const idMovie = id;
+      if (user == "") {
+      } else {
+        const url = `http://localhost:8000/favorites/${idUser}/${idMovie}`;
+        const response = await fetch(url, {
+          method: "GET",
+          credentials: "include",
+        });
+        const data = await response.json();
+        if (response.status === 200) {
+          setActive(true);
+        } else {
+          setActive(false);
+        }
+      }
+    }
+    handleClick();
+  }, []);
+
   const data = {
     id,
     backdrop_path,
@@ -74,7 +100,7 @@ const MovieModal = ({
               precision={0.1}
               readOnly
             />
-            <FavoritesButtom data={data} />
+            <FavoritesButtom data={data} active={active} />
           </div>
           <div className="modal__content">
             <h2 className="modal__title">{title ? title : name}</h2>

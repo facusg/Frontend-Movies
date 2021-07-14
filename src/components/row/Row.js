@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "../API/axios";
 import "./Row.css";
 import MovieModal from "../movieModal/movieModal";
@@ -10,8 +10,6 @@ const Row = ({ title, fetchUrl, isLargeRow, id }) => {
   const [movies, setMovies] = useState([]);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [movieSelected, setMovieSelection] = useState({});
-  const [favoriteActive, setFavoriteActive] = useState(false);
-
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(fetchUrl);
@@ -22,12 +20,11 @@ const Row = ({ title, fetchUrl, isLargeRow, id }) => {
     fetchData();
   }, [fetchUrl]);
 
-  async function handleClick(movie) {
-    console.log("mostrar modal");
-
-    setModalVisibility(true);
+  function handleClick(movie) {
     setMovieSelection(movie);
+    setModalVisibility(true);
   }
+
   return (
     <section className="row">
       {/** TITLE */}

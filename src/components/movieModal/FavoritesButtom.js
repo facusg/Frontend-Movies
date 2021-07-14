@@ -1,30 +1,40 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { UserContext } from "../../UserContext";
 
-export default function FavoritesButtom({ data }) {
+export default function FavoritesButtom({ data, active }) {
   const { user } = useContext(UserContext);
-  const id = data.id;
+  const [favoriteActive, setFavoriteActive] = useState("default");
+
+  const idMovie = data.id;
   const backdrop_path = data.backdrop_path;
-  const name = data.name;
-  const title = data.title;
+  const name = data.title ? data.title : data.name;
   const overview = data.overview;
   const trailerUrl = data.trailerUrl;
   const vote_average = data.vote_average;
+  const idUser = user.id;
+
+  useEffect(() => {
+    if (active) {
+      setFavoriteActive("secondary");
+    }
+  });
 
   async function AddFavorites() {
     const favorite = {
-      id,
+      idMovie,
+      idUser,
       backdrop_path,
       name,
-      title,
       overview,
       trailerUrl,
       vote_average,
     };
 
-    /*  const url = "http://localhost:8000/favorites";
+    console.clear();
+
+    const url = "http://localhost:8000/favorites";
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(favorite),
@@ -33,16 +43,19 @@ export default function FavoritesButtom({ data }) {
     });
     const data = await response.json();
     if (response.status === 200) {
-      alert(data.message);
+      console.log("estoy aca", data);
+      setFavoriteActive("secondary");
+      console.log(favoriteActive);
     } else {
-      alert(data.message);
-    } */
+      setFavoriteActive("default");
+      console.log(favoriteActive);
+    }
   }
   return (
     <>
       {user ? (
         <IconButton
-          color="secondary"
+          color={`${favoriteActive}`}
           aria-label="add to favorites"
           className="modal__favorite"
           onClick={AddFavorites}
