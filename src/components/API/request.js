@@ -6,7 +6,9 @@ const requests = {
   fetchNetflixOriginals: `/discover/tv?api_key=${API_KEY}&with_networks=213`,
   fetchTrending: `/trending/all/week?api_key=${API_KEY}&language=en-US`,
   /* Movies */
+  fetchTopReatedMovies: `/movie/top_rated?api_key=${API_KEY}&language=en-US`,
   fetchPopularMovies: `/movie/popular?api_key=${API_KEY}&language=en-US`,
+  fetchUpcomingMovies: `/movie/upcoming?api_key=${API_KEY}&language=en-US`,
   fetchActionMovies: `/discover/movie?api_key=${API_KEY}&with_genres=28`,
   fetchComedyMovies: `/discover/movie?api_key=${API_KEY}&with_genres=35`,
   fetchHorrorMovies: `/discover/movie?api_key=${API_KEY}&with_genres=27`,
@@ -17,6 +19,7 @@ const requests = {
   /*  SERIES */
   fetchTopReatedTv: `/tv/top_rated?api_key=${API_KEY}&language=en-US`,
   fetchPopularTv: `/tv/popular?api_key=${API_KEY}&language=en-US`,
+  fetchLatestTv: `/tv/latest?api_key=${API_KEY}&language=en-US`,
   fetchActionTv: `/discover/tv?api_key=${API_KEY}&with_genres=10759`,
   fetchComedyTv: `/discover/tv?api_key=${API_KEY}&with_genres=35`,
   fetchDramaTv: `/discover/tv?api_key=${API_KEY}&with_genres=18`,

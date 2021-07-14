@@ -6,7 +6,6 @@ import Row from "../row/Row";
 export default function Browse() {
   const [banner, setBanner] = useState([]);
   const urlBanner = request.base + request.fetchTrending;
-  console.log(urlBanner);
 
   useEffect(() => {
     async function fetchBannerMovie() {
@@ -25,18 +24,34 @@ export default function Browse() {
     <>
       <Banner content={banner} />
       <Row
-        title="NETFLIX ORIGINALS"
-        id="NO"
-        fetchUrl={request.fetchNetflixOriginals}
+        title="TRENDING NOW"
+        id="TrN"
+        fetchUrl={request.fetchTrending}
         isLargeRow
-        data={null}
       />
       <Row
-        title="ACTION"
-        id="ACTION"
-        fetchUrl={request.fetchActionMovies}
+        title="POPULAR MOVIES"
+        id="PM"
+        fetchUrl={request.fetchPopularMovies}
         isLargeRow
-        data={null}
+      />
+      <Row
+        title="POPULAR TV SERIES"
+        id="PTv"
+        fetchUrl={request.fetchPopularTv}
+        isLargeRow
+      />
+      <Row
+        title="TOP REATED MOVIES"
+        id="TRM"
+        fetchUrl={request.fetchTopReatedMovies}
+        isLargeRow
+      />
+      <Row
+        title="TOP REATED TV SERIES"
+        id="TRTv"
+        fetchUrl={request.fetchTopReatedTv}
+        isLargeRow
       />
     </>
   );

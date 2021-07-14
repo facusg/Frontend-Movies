@@ -6,7 +6,6 @@ import Row from "../row/Row";
 export default function SeriesScreen() {
   const [banner, setBanner] = useState([]);
   const urlBanner = request.base + request.fetchPopularTv;
-  console.log(urlBanner);
 
   useEffect(() => {
     async function fetchBannerMovie() {
@@ -20,7 +19,7 @@ export default function SeriesScreen() {
     }
     fetchBannerMovie();
   }, [urlBanner]);
-  console.log(banner + "holas");
+
   return (
     <div className="Series">
       <Banner content={banner} />

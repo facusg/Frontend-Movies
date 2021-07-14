@@ -27,7 +27,7 @@ const MovieModal = ({
     height: "390",
     width: "100%",
     playerVars: {
-      autoplay: 0,
+      autoplay: 1,
     },
   };
 
@@ -46,10 +46,11 @@ const MovieModal = ({
 
   useEffect(() => {
     async function handleClick() {
-      const idUser = user.id;
       const idMovie = id ? id : idAPI;
-      if (user == "") {
+
+      if (user === null) {
       } else {
+        const idUser = user.id;
         const url = `http://localhost:8000/favorites/${idUser}/${idMovie}`;
         const response = await fetch(url, {
           method: "GET",
@@ -67,7 +68,7 @@ const MovieModal = ({
   }, []);
 
   const data = {
-    id,
+    id: id ? id : idAPI,
     backdrop_path,
     title,
     overview,
@@ -101,7 +102,11 @@ const MovieModal = ({
               precision={0.1}
               readOnly
             />
-            <FavoritesButtom data={data} active={active} />
+            <FavoritesButtom
+              data={data}
+              active={active}
+              setModalVisibility={setModalVisibility}
+            />
           </div>
           <div className="modal__content">
             <h2 className="modal__title">{title ? title : name}</h2>

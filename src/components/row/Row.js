@@ -14,7 +14,6 @@ const Row = ({ title, fetchUrl, isLargeRow, id }) => {
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(fetchUrl);
-      console.log("este el el formato necesario", request.data.results);
       setMovies(request.data.results);
       return request;
     }
@@ -46,7 +45,7 @@ const Row = ({ title, fetchUrl, isLargeRow, id }) => {
           {/**SEVERAL ROW__POSTER */}
           {movies.map((movie) => (
             <img
-              key={movie.id || movie.idAPI}
+              key={movie.idAPI ? movie.idAPI : movie.id}
               onClick={() => handleClick(movie)}
               className={`row__poster ${isLargeRow && "row__posterLarge"}`}
               src={`${base_url}${

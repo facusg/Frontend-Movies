@@ -30,7 +30,7 @@ export default function NavBar({ user, updateUser }) {
         <Toolbar>
           <Link exact to="/" style={{ textDecoration: "none", color: "white" }}>
             <Button color="inherit">
-              <Typography value="h5">"Logo"</Typography>
+              <Typography value="h5">Reapp Movies</Typography>
             </Button>
           </Link>
           {user ? (

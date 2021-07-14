@@ -5,8 +5,6 @@ import Row from "../row/Row";
 export default function SearchScreen() {
   const { searchURL } = useContext(UserContext);
 
-  console.log(searchURL);
-
   return (
     <div id="searchScreen" style={{ marginTop: 80 }}>
       {searchURL !== "" ? (

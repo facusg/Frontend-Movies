@@ -62,7 +62,6 @@ export default function SettingAccount({ user, updateUser }) {
     if (deletePassword === "") {
       setMessage2("Tiene que ingresar su contraseña");
     } else {
-      console.log(deletePassword);
       const url = `http://localhost:8000/users/${user.id}`;
       const response = await fetch(url, {
         method: "DELETE",

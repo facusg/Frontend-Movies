@@ -3,7 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { UserContext } from "../../UserContext";
 
-export default function FavoritesButtom({ data, active }) {
+export default function FavoritesButtom({ data, active, setModalVisibility }) {
   const { user } = useContext(UserContext);
   const [favoriteActive, setFavoriteActive] = useState("default");
 
@@ -13,7 +13,6 @@ export default function FavoritesButtom({ data, active }) {
   const overview = data.overview;
   const trailerUrl = data.trailerUrl;
   const vote_average = data.vote_average;
-  const idUser = user.id;
 
   useEffect(() => {
     if (active) {
@@ -22,6 +21,7 @@ export default function FavoritesButtom({ data, active }) {
   });
 
   async function AddFavorites() {
+    const idUser = user.id;
     const favorite = {
       idMovie,
       idUser,
@@ -32,23 +32,31 @@ export default function FavoritesButtom({ data, active }) {
       vote_average,
     };
 
-    console.clear();
-
-    const url = "http://localhost:8000/favorites";
-    const response = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(favorite),
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
-    const data = await response.json();
-    if (response.status === 200) {
-      console.log("estoy aca", data);
-      setFavoriteActive("secondary");
-      console.log(favoriteActive);
+    if (favoriteActive === "secondary") {
+      const url1 = `http://localhost:8000/favorites/${idUser}/${idMovie}`;
+      const response = await fetch(url1, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (response.status === 200) {
+        setFavoriteActive("default");
+      }
     } else {
-      setFavoriteActive("default");
-      console.log(favoriteActive);
+      const url = "http://localhost:8000/favorites";
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(favorite),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (response.status === 200) {
+        setFavoriteActive("secondary");
+      } else {
+        setFavoriteActive("default");
+      }
     }
   }
   return (

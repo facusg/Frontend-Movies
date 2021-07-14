@@ -2,13 +2,6 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { NavLink } from "react-router-dom";
 export default function BottonLogin() {
-  const handleLoginClick = () => {
-    console.log("Mostrar Login");
-  };
-  const handleRegisterClick = () => {
-    console.log("Mostrar Register");
-  };
-
   return (
     <>
       <div style={{ flexGrow: 1 }}></div>
@@ -17,7 +10,7 @@ export default function BottonLogin() {
         to="/login"
         style={{ textDecoration: "none", color: "white" }}
       >
-        <Button onClick={handleLoginClick} color="inherit" href="#">
+        <Button color="inherit" href="#">
           Login
         </Button>
       </NavLink>
@@ -27,7 +20,7 @@ export default function BottonLogin() {
         to="/register"
         style={{ textDecoration: "none", color: "white" }}
       >
-        <Button onClick={handleRegisterClick} color="inherit" href="#">
+        <Button color="inherit" href="#">
           Register
         </Button>
       </NavLink>
